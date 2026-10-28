@@ -83,10 +83,10 @@ export default function Home() {
       {/* Hero Section */}
       <section
         id="home"
-        className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-14 md:grid-cols-2 md:px-10 md:py-24 lg:px-16"
+        className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-10 md:grid-cols-2 md:px-10 md:py-10 lg:px-10"
       >
         <div>
-          <p className="mb-5 text-xs font-bold uppercase tracking-[0.25em] text-[#a66c43]">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.25em] text-[#a66c43]">
             Everything for your furry family
           </p>
 
@@ -181,7 +181,7 @@ export default function Home() {
       {/* Adoption Section */}
       <section
         id="pets"
-        className="mx-auto max-w-7xl px-6 py-16 md:px-10 lg:px-16"
+        className="mx-auto max-w-7xl px-6 py-10 md:px-10 lg:px-10"
       >
         <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
@@ -281,7 +281,7 @@ export default function Home() {
       {/* Mission Section */}
       <section
         id="about"
-        className="bg-[#e9ede3] px-6 py-16 text-center md:px-16 md:py-24"
+        className="bg-[#e9ede3] px-6 py-10 text-center md:px-10 md:py-10"
       >
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#a66c43]">
           More than a pet store

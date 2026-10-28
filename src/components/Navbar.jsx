@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useCart } from '../context/CartContext.jsx'
+import { useWishlist } from "../context/WishlistContext";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [shopOpen, setShopOpen] = useState(false)
+  const { wishlist } = useWishlist();
+  const wishlistCount = wishlist.length;
+
+  const { totalItems } = useCart()
 
   const categories = [
     { name: 'Food & Treats', path: '/shop/food-treats', icon: '🥣' },
@@ -27,10 +33,9 @@ export default function Navbar() {
   }
 
   const linkStyle = ({ isActive }) =>
-    `whitespace-nowrap text-sm font-medium transition-colors ${
-      isActive
-        ? 'text-[#a66c43]'
-        : 'text-[#526457] hover:text-[#a66c43]'
+    `whitespace-nowrap text-md font-medium transition-colors ${isActive
+      ? 'text-[#a66c43]'
+      : 'text-[#526457] hover:text-[#a66c43]'
     }`
 
   return (
@@ -72,7 +77,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setShopOpen(!shopOpen)}
               aria-expanded={shopOpen}
-              className="flex items-center gap-1 whitespace-nowrap py-2 text-sm font-medium text-[#526457] transition-colors hover:text-[#a66c43]"
+              className="flex items-center gap-1 whitespace-nowrap py-2 text-md font-medium text-[#526457] transition-colors hover:text-[#a66c43]"
             >
               Shop
               <span className={`text-xs transition-transform ${shopOpen ? 'rotate-180' : ''}`}>
@@ -91,7 +96,7 @@ export default function Navbar() {
                     key={category.path}
                     to={category.path}
                     onClick={closeMenus}
-                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-sm text-[#526457] transition hover:bg-[#f1f2e9] hover:text-[#183d2b]"
+                    className="flex items-center gap-3 rounded-xl px-3 py-3 text-md text-[#526457] transition hover:bg-[#f1f2e9] hover:text-[#183d2b]"
                   >
                     <span className="text-lg">{category.icon}</span>
                     <span>{category.name}</span>
@@ -112,17 +117,44 @@ export default function Navbar() {
             </NavLink>
           ))}
         </div>
+          
+        <Link
+          to="/wishlist"
+          onClick={closeMenus}
+          className="relative inline-flex items-center justify-center text-[#244b37]"
+          aria-label={`Wishlist, ${wishlistCount} products`}
+        >
+          <span className="text-2xl">♡</span>
+
+          {wishlistCount > 0 && (
+            <span className="absolute -right-3 -top-2 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#c96f42] px-1 text-xs font-bold text-white">
+              {wishlistCount}
+            </span>
+          )}
+        </Link>
 
         {/* Desktop Cart */}
+
         <Link
           to="/cart"
           onClick={closeMenus}
-          aria-label="Shopping cart"
-          className="hidden shrink-0 items-center gap-2 rounded-full border border-[#d9ded4] px-4 py-2.5 text-sm font-semibold text-[#244b37] transition hover:bg-[#e9ede3] xl:inline-flex"
+          className="relative inline-flex items-center justify-center p-2 text-[#244b37]"
         >
-          <span className="text-lg">🛒</span>
-          Cart
+          <span className="text-2xl">🛒</span>
+
+          {totalItems > 0 && (
+            <span className="absolute right-0 top-0 flex h-5 min-w-5 -translate-y-1/4 translate-x-1/4 items-center justify-center rounded-full bg-[#d97736] px-1 text-[11px] font-bold text-white ring-2 ring-white">
+              {totalItems > 99 ? '99+' : totalItems}
+            </span>
+          )}
         </Link>
+        <Link
+          to="/orders"
+          className="font-medium text-[#244b37] transition hover:text-[#a66c43]"
+        >
+          Orders
+        </Link>
+
 
         {/* Mobile Menu Button */}
         <button
@@ -146,8 +178,7 @@ export default function Navbar() {
               end
               onClick={closeMenus}
               className={({ isActive }) =>
-                `rounded-xl px-4 py-3 text-sm font-medium ${
-                  isActive ? 'bg-[#e9ede3] text-[#183d2b]' : 'text-[#526457]'
+                `rounded-xl px-4 py-3 text-md font-medium ${isActive ? 'bg-[#e9ede3] text-[#183d2b]' : 'text-[#526457]'
                 }`
               }
             >
@@ -159,7 +190,7 @@ export default function Navbar() {
               type="button"
               onClick={() => setShopOpen(!shopOpen)}
               aria-expanded={shopOpen}
-              className="flex items-center justify-between rounded-xl px-4 py-3 text-left text-sm font-medium text-[#526457] hover:bg-[#e9ede3]"
+              className="flex items-center justify-between rounded-xl px-4 py-3 text-left text-md font-medium text-[#526457] hover:bg-[#e9ede3]"
             >
               Shop
               <span>{shopOpen ? '−' : '+'}</span>
@@ -172,7 +203,7 @@ export default function Navbar() {
                     key={category.path}
                     to={category.path}
                     onClick={closeMenus}
-                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-sm text-[#526457] hover:bg-[#e9ede3]"
+                    className="flex items-center gap-3 rounded-xl px-4 py-3 text-md text-[#526457] hover:bg-[#e9ede3]"
                   >
                     <span>{category.icon}</span>
                     {category.name}
@@ -187,10 +218,9 @@ export default function Navbar() {
                 to={link.path}
                 onClick={closeMenus}
                 className={({ isActive }) =>
-                  `rounded-xl px-4 py-3 text-sm font-medium ${
-                    isActive
-                      ? 'bg-[#e9ede3] text-[#183d2b]'
-                      : 'text-[#526457]'
+                  `rounded-xl px-4 py-3 text-md font-medium ${isActive
+                    ? 'bg-[#e9ede3] text-[#183d2b]'
+                    : 'text-[#526457]'
                   }`
                 }
               >
@@ -199,17 +229,32 @@ export default function Navbar() {
             ))}
 
             <Link
+              to="/wishlist"
+              onClick={closeMenus}
+              className="mt-2 flex items-center justify-center gap-2 rounded-full border border-[#d9ded4] px-5 py-3 font-semibold text-[#244b37]"
+            >
+              ♡
+            </Link>
+
+            <Link
               to="/cart"
               onClick={closeMenus}
-              className="mt-2 rounded-full border border-[#d9ded4] px-5 py-3 text-center text-sm font-semibold text-[#244b37]"
+              className="mt-2 inline-flex items-center justify-center gap-2 rounded-full border border-[#d9ded4] px-5 py-3 text-md font-semibold text-[#244b37]"
             >
               🛒 View Cart
+
+              {totalItems > 0 && (
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[#d97736] px-1 text-xs font-bold text-white">
+                  {totalItems > 99 ? '99+' : totalItems}
+                </span>
+              )}
             </Link>
+
 
             <Link
               to="/pets"
               onClick={closeMenus}
-              className="mt-2 rounded-full bg-[#244b37] px-5 py-3.5 text-center text-sm font-semibold text-white"
+              className="mt-2 rounded-full bg-[#244b37] px-5 py-3.5 text-center text-md font-semibold text-white"
             >
               Adopt a Friend ↗
             </Link>
