@@ -1,34 +1,36 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { pets } from '../data/pets'
 
-const pets = [
-  {
-    id: 1,
-    name: 'Bruno',
-    breed: 'Golden Retriever',
-    age: '2 years',
-    type: 'Dog',
-    image:
-      'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=85',
-  },
-  {
-    id: 2,
-    name: 'Luna',
-    breed: 'Persian Cat',
-    age: '1 year',
-    type: 'Cat',
-    image:
-      'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=85',
-  },
-  {
-    id: 3,
-    name: 'Charlie',
-    breed: 'Beagle',
-    age: '8 months',
-    type: 'Dog',
-    image:
-      'https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&w=800&q=85',
-  },
-]
+// const pets = [
+//   {
+//     id: 1,
+//     name: 'Bruno',
+//     breed: 'Golden Retriever',
+//     age: '2 years',
+//     type: 'Dog',
+//     image:
+//       'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=85',
+//   },
+//   {
+//     id: 2,
+//     name: 'Luna',
+//     breed: 'Persian Cat',
+//     age: '1 year',
+//     type: 'Cat',
+//     image:
+//       'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=800&q=85',
+//   },
+//   {
+//     id: 3,
+//     name: 'Charlie',
+//     breed: 'Beagle',
+//     age: '8 months',
+//     type: 'Dog',
+//     image:
+//       'https://images.unsplash.com/photo-1505628346881-b72b27e84530?auto=format&fit=crop&w=800&q=85',
+//   },
+// ]
 
 const categories = [
   {
@@ -159,9 +161,9 @@ export default function Home() {
 
         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
           {categories.map((category) => (
-            <a
+            <Link
               key={category.path}
-              href={category.path}
+              to={category.path}
               className="rounded-2xl border border-[#e6e5dc] bg-white p-5 transition hover:-translate-y-1 hover:shadow-md"
             >
               <span className="text-3xl">{category.icon}</span>
@@ -173,7 +175,7 @@ export default function Home() {
               <p className="mt-2 text-xs text-[#a66c43]">
                 Explore ↗
               </p>
-            </a>
+            </Link>
           ))}
         </div>
       </section>
@@ -198,12 +200,12 @@ export default function Home() {
             </p>
           </div>
 
-          <a
-            href="/pets"
+          <Link
+            to="/pets"
             className="text-sm font-semibold text-[#a66c43] hover:underline"
           >
             View all pets ↗
-          </a>
+          </Link>
         </div>
 
         <div className="mt-7 flex flex-col gap-3 sm:flex-row">
@@ -222,11 +224,10 @@ export default function Home() {
                 key={type}
                 type="button"
                 onClick={() => setFilter(type)}
-                className={`rounded-full border px-5 py-3 text-sm ${
-                  filter === type
-                    ? 'border-[#244b37] bg-[#244b37] text-white'
-                    : 'border-[#d9ded4] bg-white text-[#244b37]'
-                }`}
+                className={`rounded-full border px-5 py-3 text-sm ${filter === type
+                  ? 'border-[#244b37] bg-[#244b37] text-white'
+                  : 'border-[#d9ded4] bg-white text-[#244b37]'
+                  }`}
               >
                 {type === 'All' ? 'All pets' : `${type}s`}
               </button>
@@ -260,12 +261,12 @@ export default function Home() {
                   {pet.breed} · {pet.age}
                 </p>
 
-                <a
-                  href={`mailto:hello@example.com?subject=${encodeURIComponent(`Adoption enquiry for ${pet.name}`)}`}
-                  className="mt-6 block rounded-full border border-[#244b37] px-5 py-3 text-center text-sm font-semibold hover:bg-[#244b37] hover:text-white"
+                <Link
+                  to={`/pets/${pet.id}`}
+                  className="mt-6 block rounded-full border border-[#244b37] px-5 py-3 text-center text-sm font-semibold transition hover:bg-[#244b37] hover:text-white"
                 >
                   Meet {pet.name} ↗
-                </a>
+                </Link>
               </div>
             </article>
           ))}

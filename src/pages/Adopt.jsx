@@ -1,86 +1,88 @@
-
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import { pets } from '../data/pets'
+import { Heart, MessageCircle, CalendarCheck } from 'lucide-react'
 
-const pets = [
-  {
-    id: 1,
-    name: 'Bruno',
-    type: 'Dog',
-    breed: 'Golden Retriever',
-    age: '2 years',
-    gender: 'Male',
-    location: 'Ghaziabad, UP',
-    image:
-      'https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=85',
-    description: 'Friendly, playful and loves spending time with people.',
-    color: 'bg-[#e7eee1]',
-  },
-  {
-    id: 2,
-    name: 'Luna',
-    type: 'Cat',
-    breed: 'Domestic Shorthair',
-    age: '8 months',
-    gender: 'Female',
-    location: 'Delhi, India',
-    image:
-      'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&q=85',
-    description: 'A gentle, curious kitten looking for a loving home.',
-    color: 'bg-[#f3e8dc]',
-  },
-  {
-    id: 3,
-    name: 'Coco',
-    type: 'Dog',
-    breed: 'Indie',
-    age: '1 year',
-    gender: 'Female',
-    location: 'Noida, UP',
-    image:
-      'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800&q=85',
-    description: 'An energetic companion who enjoys walks and playtime.',
-    color: 'bg-[#e7eee1]',
-  },
-  {
-    id: 4,
-    name: 'Milo',
-    type: 'Cat',
-    breed: 'Tabby Cat',
-    age: '1.5 years',
-    gender: 'Male',
-    location: 'Ghaziabad, UP',
-    image:
-      'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=85',
-    description: 'A relaxed and affectionate cat who enjoys a cosy nap.',
-    color: 'bg-[#f3e8dc]',
-  },
-  {
-    id: 5,
-    name: 'Buddy',
-    type: 'Dog',
-    breed: 'Labrador Mix',
-    age: '3 years',
-    gender: 'Male',
-    location: 'Delhi, India',
-    image:
-      'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&q=85',
-    description: 'Loyal, cheerful and ready for new adventures.',
-    color: 'bg-[#e7eee1]',
-  },
-  {
-    id: 6,
-    name: 'Bella',
-    type: 'Cat',
-    breed: 'Calico',
-    age: '1 year',
-    gender: 'Female',
-    location: 'Noida, UP',
-    image:
-      'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=800&q=85',
-    description: 'A sweet companion who deserves a safe, caring home.',
-    color: 'bg-[#f3e8dc]',
-  },
-]
+// const pets = [
+//   {
+//     id: 1,
+//     name: 'Bruno',
+//     type: 'Dog',
+//     breed: 'Golden Retriever',
+//     age: '2 years',
+//     gender: 'Male',
+//     location: 'Ghaziabad, UP',
+//     image:
+//       'https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&q=85',
+//     description: 'Friendly, playful and loves spending time with people.',
+//     color: 'bg-[#e7eee1]',
+//   },
+//   {
+//     id: 2,
+//     name: 'Luna',
+//     type: 'Cat',
+//     breed: 'Domestic Shorthair',
+//     age: '8 months',
+//     gender: 'Female',
+//     location: 'Delhi, India',
+//     image:
+//       'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&q=85',
+//     description: 'A gentle, curious kitten looking for a loving home.',
+//     color: 'bg-[#f3e8dc]',
+//   },
+//   {
+//     id: 3,
+//     name: 'Coco',
+//     type: 'Dog',
+//     breed: 'Indie',
+//     age: '1 year',
+//     gender: 'Female',
+//     location: 'Noida, UP',
+//     image:
+//       'https://images.unsplash.com/photo-1517849845537-4d257902454a?w=800&q=85',
+//     description: 'An energetic companion who enjoys walks and playtime.',
+//     color: 'bg-[#e7eee1]',
+//   },
+//   {
+//     id: 4,
+//     name: 'Milo',
+//     type: 'Cat',
+//     breed: 'Tabby Cat',
+//     age: '1.5 years',
+//     gender: 'Male',
+//     location: 'Ghaziabad, UP',
+//     image:
+//       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=85',
+//     description: 'A relaxed and affectionate cat who enjoys a cosy nap.',
+//     color: 'bg-[#f3e8dc]',
+//   },
+//   {
+//     id: 5,
+//     name: 'Buddy',
+//     type: 'Dog',
+//     breed: 'Labrador Mix',
+//     age: '3 years',
+//     gender: 'Male',
+//     location: 'Delhi, India',
+//     image:
+//       'https://images.unsplash.com/photo-1543466835-00a7907e9de1?w=800&q=85',
+//     description: 'Loyal, cheerful and ready for new adventures.',
+//     color: 'bg-[#e7eee1]',
+//   },
+//   {
+//     id: 6,
+//     name: 'Bella',
+//     type: 'Cat',
+//     breed: 'Calico',
+//     age: '1 year',
+//     gender: 'Female',
+//     location: 'Noida, UP',
+//     image:
+//       'https://images.unsplash.com/photo-1495360010541-f48722b34f7d?w=800&q=85',
+//     description: 'A sweet companion who deserves a safe, caring home.',
+//     color: 'bg-[#f3e8dc]',
+//   },
+// ]
 
 export default function Adopt() {
   const [filter, setFilter] = useState('All')
@@ -241,11 +243,10 @@ export default function Adopt() {
                 key={type}
                 type="button"
                 onClick={() => setFilter(type)}
-                className={`rounded-full px-6 py-2.5 font-semibold transition ${
-                  filter === type
-                    ? 'bg-[#244b37] text-white'
-                    : 'border border-[#d9ded4] bg-white text-[#244b37] hover:bg-[#e6efe5]'
-                }`}
+                className={`rounded-full px-6 py-2.5 font-semibold transition ${filter === type
+                  ? 'bg-[#244b37] text-white'
+                  : 'border border-[#d9ded4] bg-white text-[#244b37] hover:bg-[#e6efe5]'
+                  }`}
               >
                 {type === 'All' ? 'All Pets' : `${type}s`}
               </button>
@@ -306,13 +307,12 @@ export default function Adopt() {
                     {pet.location}
                   </p>
 
-                  <button
-                    type="button"
-                    onClick={() => openAdoptionForm(pet)}
-                    className="mt-5 w-full rounded-full bg-[#244b37] px-5 py-3.5 font-semibold text-white transition hover:bg-[#183d2b]"
+                  <Link
+                    to={`/pets/${pet.id}`}
+                    className="mt-5 block w-full rounded-full bg-[#244b37] px-5 py-3.5 text-center font-semibold text-white transition hover:bg-[#183d2b]"
                   >
                     Meet {pet.name} →
-                  </button>
+                  </Link>
                 </div>
               </article>
             ))}
@@ -351,41 +351,49 @@ export default function Adopt() {
             </h2>
           </div>
 
+
           <div className="mt-10 grid gap-5 md:grid-cols-3">
             {[
               {
-                number: '01',
+                icon: Heart,
                 title: 'Meet a pet',
                 description:
                   'Explore profiles and choose a companion that suits your home and lifestyle.',
               },
               {
-                number: '02',
+                icon: MessageCircle,
                 title: 'Send an inquiry',
                 description:
                   'Share a few details so the adoption team can learn more about you.',
               },
               {
-                number: '03',
+                icon: CalendarCheck,
                 title: 'Plan a meeting',
                 description:
                   'Discuss suitability, care needs and next steps with the responsible caretaker.',
               },
-            ].map((step) => (
-              <div
-                key={step.number}
-                className="rounded-3xl bg-white p-7"
-              >
-                <span className="text-3xl font-bold text-[#a66c43]">
-                  {step.number}
-                </span>
-                <h3 className="mt-4 text-xl font-bold">{step.title}</h3>
-                <p className="mt-3 leading-7 text-[#68766b]">
-                  {step.description}
-                </p>
-              </div>
-            ))}
+            ].map((step) => {
+              const Icon = step.icon
+
+              return (
+                <div
+                  key={step.title}
+                  className="rounded-3xl bg-white p-7"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#e8eee3] text-[#244b37]">
+                    <Icon size={28} strokeWidth={1.8} />
+                  </div>
+
+                  <h3 className="mt-5 text-xl font-bold">{step.title}</h3>
+
+                  <p className="mt-3 leading-7 text-[#68766b]">
+                    {step.description}
+                  </p>
+                </div>
+              )
+            })}
           </div>
+
 
           <p className="mt-7 text-center text-sm leading-6 text-[#526457]">
             These are illustrative demo listings. Please verify pet availability
