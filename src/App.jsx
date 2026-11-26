@@ -22,7 +22,7 @@ function App() {
   return (
     <CartProvider>
       <WishlistProvider>
-        <BrowserRouter>
+        <BrowserRouter basename="/pet-website">
           <ScrollToTop />
           <Navbar />
 
