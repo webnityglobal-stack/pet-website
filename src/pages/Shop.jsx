@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'
 import { useWishlist } from '../context/WishlistContext.jsx'
 
+const BASE = import.meta.env.BASE_URL
+
 const categories = [
     { name: 'Food & Treats', slug: 'food-treats', icon: '🥣' },
     { name: 'Accessories', slug: 'accessories', icon: '🦴' },
@@ -17,44 +19,44 @@ export const products = [
     // FOOD & TREATS — 4 unique images
     {
         id: 1, name: 'Premium Dog Food', category: 'food-treats',
-        price: 799, image: "/food/food-1.png",
+        price: 799, image: `${BASE}food/food-1.png`,
         description: 'Daily nutrition for happy, active dogs.',
     },
     {
         id: 2, name: 'Crunchy Dog Biscuits', category: 'food-treats',
-        price: 249, image: "/food/food-2.png",
+        price: 249, image: `${BASE}food/food-2.png`,
         description: 'A tasty treat for your furry friend.',
     },
     {
         id: 3, name: 'Wholesome Cat Food', category: 'food-treats',
-        price: 599, image: "/food/cat-food-1.png",
+        price: 599, image: `${BASE}food/cat-food-1.png`,
         description: 'Everyday food for your beloved cat.',
     },
     {
         id: 4, name: 'Training Treats', category: 'food-treats',
-        price: 199, image: "/food/chicken-food.png",
+        price: 199, image: `${BASE}food/chicken-food.png`,
         description: 'Reward your pet during training.',
     },
 
     // ACCESSORIES — 4 unique images
     {
         id: 5, name: 'Adjustable Pet Collar', category: 'accessories',
-        price: 299, image: "/accessories/pet-collar.png",
+        price: 299, image: `${BASE}accessories/pet-collar.png`,
         description: 'A comfortable collar for daily walks.',
     },
     {
         id: 6, name: 'Pet Walking Leash', category: 'accessories',
-        price: 499, image: "/accessories/pet-lease.png",
+        price: 499, image: `${BASE}accessories/pet-lease.png`,
         description: 'A useful companion for outdoor walks.',
     },
     {
         id: 7, name: 'Interactive Pet Toy', category: 'accessories',
-        price: 349, image: "/accessories/pet-toy.png",
+        price: 349, image: `${BASE}accessories/pet-toy.png`,
         description: 'Make playtime more enjoyable.',
     },
     {
         id: 8, name: 'Pet Feeding Bowl', category: 'accessories',
-        price: 249, image: '/accessories/pet-Bowl.png',
+        price: 249, image: `${BASE}accessories/pet-Bowl.png`,
         description: 'An everyday essential for your pet.',
     },
 
